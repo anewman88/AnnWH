@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modal HTML</title>
+
+<!-- Latest compiled and minified JavaScript -->
+
+<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="assets/css/whatshappening.css">
+
+<link rel="stylesheet" type="text/css" href="assets/css/newsletter.css">
+
+<script type="text/javascript"></script>
+<script src="assets/javascript/common.js"></script>
+<script src="assets/javascript/whapp.js"></script>
+
+
+<style>
+
+  
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+
+
+/**************************************************************************/
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/**************************************************************************/
+</style>
+</head>
+<body>
+
+<h2>Modal Happening</h2>
+
+<!-- **************New Modal *************************************-->
+<!-- Trigger/Open The Modal -->
+
+<div class="btn-group">
+    <button type="button" id="newsBtn" class="btn btn-light"><i class="fas fa-pen"></i>Newsletter Signup</button>
+</div>  
+
+<!-- The Modal -->
+
+<!-- The Modal -->
+<div id="NewsModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+
+        <div class="modal-header" style="padding:35px 35px;">
+            <div>
+                <h4 id="news-title"> Subscribe to our Newsletter </h4>
+                <h5 id="usrMsg"></h5>
+            </div>
+          </div>
+    
+          <div class="modal-body" style="padding:40px 50px;">
+              <form role="form" id=usrForm>
+                  <div class="form-group">
+                      <label for="usrname"><span></span><i class="fas fa-user"></i> Name</label>
+                      <input type="text" style="margin-left:0px" class="form-control" id="usrName" placeholder="Enter your first name">
+                  </div>
+                  <div class="form-group">
+                      <label for="usremail"><span ></span><i class="fas fa-envelope"></i> Email </label>
+                      <input type="text" style="margin-left:0px" class="form-control" id="usrEmail" placeholder="Enter email address email@example.com">
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  </div>
+                <button type="submit" class="btn btn-success" id="submitBtn"><span class="fas fa-check"></span> Submit </button>
+              </form>
+          </div>
+
+          <div class="modal-footer">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+          
+    </div>
+  
+  </div>
+  
+
+
+
+<!-- **************Newsletter Modal *************************************-->
+<!-- *********************************************************************-->
+  
+<!--
+<div class="dropdown">
+  <button onclick="CitySelectFunction()" class="dropbtn">City</button>
+  <div id="CityDropDown" class="dropdown-content">
+        <a value="Dallas" >Dallas </a>
+        <a value="Houston">Houston</a>
+        <a value="Chicago">Chicago</a>
+        <a value="Los Angeles">Los Angeles</a>
+        <a value="New York">New York</a>
+
+  </div>
+</div>
+
+-->
+
+<div class="dropdown">
+    <select class="dropbtn" id="CityDropDown" onchange="SelectCity(this.value)">
+        <option selected="selected">Select a City</option>
+    </select>
+</div>
+
+<div class="dropdown">
+    <button onclick="ThingsToggle()" class="dropbtn">Things To Do</button>
+    <div id="ThingsDropDown" class="dropdown-content">
+        <a value="Movies" onclick="getThings('Movies')">Movies</a>
+        <a value="Sports" onclick="getThings('Sports')">Sports</a>
+        <a value="Concerts" onclick="getThings('Concerts')">Concerts</a>
+        <a value="Local Events" onclick="getThings('LocalEvents')">Local Events</a>
+    </div>
+</div>
+
+<div class="dropdown">
+    <button onclick="FoodToggle()" class="dropbtn">Food</button>
+    <div id="FoodDropDown" class="dropdown-content">  
+        <a value="American" onclick="getFood('American')">American</a>
+        <a value="Italian" onclick="getFood('Italian')">Italian</a>
+        <a value="BBQ" onclick="getFood('BBQ')">BBQ</a>
+        <a value="Mexican" onclick="getFood('Mexican')">Mexican</a>
+        <a value="Asian" onclick="getFood('Asian')">Asian</a>
+    </div>
+</div>
+
+<div class="dropdown">
+    <button onclick="NightToggle()" class="dropbtn">Night Life</button>
+    <div id="NightDropDown" class="dropdown-content">  
+        <a value="Sports Bars" onclick="getNight('Sports Bars')">Sports Bars</a>
+        <a value="Craft Beer" onclick="getNight('Craft Beer')">Craft Beer</a>
+        <a value="Live Music" onclick="getNight('Live Music')">Live Music</a>
+        <a value="Clubs & Lounges" onclick="getNight('Clubs & Lounges')">Clubs & Lounges</a>
+        <a value="Wine Bar" onclick="getNight('Wine Bar')">Wine Bar</a>
+    </div>
+</div>
+</div> 
+  <div id="WeatherWidgetHere"></div> 
+<div id="CityCategory"></div> 
+
+<div class="container" id="ResultsDisplay">
+  <table class="table table-bordered" id="result-header">
+      <tbody id="content-area">
+            <tbody>
+            </tbody>
+      </tbody>
+  </table>
+</div>   
+
+
+<script>
+
+//*****************************************************************************
+var MyMockUp = true;
+
+// When the user clicks on the button, toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementByID("ThingsDropDown").classList.toggle("show");
+}
+
+// When the user clicks on the button, toggle between hiding and showing the dropdown content */
+function ThingsToggle() {
+  document.getElementById("ThingsDropDown").classList.toggle("show");
+}
+// When the user clicks on the button, toggle between hiding and showing the dropdown content */
+function FoodToggle() {
+    document.getElementById("FoodDropDown").classList.toggle("show");
+}
+// When the user clicks on the button, toggle between hiding and showing the dropdown content */
+function NightToggle() {
+    document.getElementById("NightDropDown").classList.toggle("show");
+}
+
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+
+function MakeDB() {
+
+    database.ref().push({
+        CityName: "Dallas",
+        CityZomID: "276"        
+    });
+
+    database.ref().push({
+        CityName: "Houston",
+        CityZomID: "277"       
+    });
+
+    database.ref().push({
+        CityName: "New York",
+        CityZomID: "280"      
+    });
+
+    database.ref().push({
+        CityName: "Chicago",
+        CityZomID: "292"      
+    });
+
+    database.ref().push({
+        CityName: "Los Angeles",
+        CityZomID: "281"        
+    });
+
+
+}  // MakeDB()
+
+
+// Get the modal
+var modal = document.getElementById('NewsModal');
+
+// Get the button that opens the modal
+var Newsbtn = document.getElementById("newsBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+Newsbtn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</head>
+<body>
+
+
+</body>
+</html>
+
+
